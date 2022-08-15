@@ -1,2 +1,2 @@
 # Fbot-VSSS-Joystick
-a simple joystick code to control the Fbot VSSS robot
+A simple joystick code to control the Fbot VSSS robot
