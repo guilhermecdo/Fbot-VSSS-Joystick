@@ -1,4 +1,4 @@
-from xbox360controller import Xbox360Controller
+from xbox360controller import Xbox360Controller #pip install xbox360controller
 import numpy as np
 import time
 import serial
@@ -9,7 +9,7 @@ id=1
 
 controller=Xbox360Controller(0, axis_threshold=0.0001)
 
-s=serial.Serial('/dev/ttyUSB0')
+s=serial.Serial('/dev/ttyUSB1')# Radio serial Port 
 s.baudrate=9600
 s.bytesize=serial.EIGHTBITS #number of bits per bytes
 s.parity=serial.PARITY_NONE #set parity check: no parity
@@ -83,7 +83,7 @@ def kinematics(x,y):
 
     return leftWheelVelocity, rightWheelVelocity
 
-while True:
+while not controller.button_start.is_pressed:
     if controller.button_a.is_pressed:
         
         x=controller.axis_l.x
@@ -92,4 +92,5 @@ while True:
         leftWheelVelocity,rightWheelVelocity=kinematics(x,y)
         message=messageCreator(leftWheelVelocity,rightWheelVelocity,x,y,id,controller.trigger_r.value)
         radioWrite(message)
-        time.sleep(1/60)
+        time.sleep(1/60)# message sending frequency
+exit()
